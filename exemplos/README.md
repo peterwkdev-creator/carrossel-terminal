@@ -38,7 +38,7 @@ Precisa do ffmpeg. Sai `exemplos/post-exemplo/reel/post-exemplo-reel.mp4`,
 
 ## 4. Reel narrado (opcional)
 
-Com o TTS `tts-ptbr` instalado
+Com o TTS [`tts-ptbr`](https://github.com/peterwkdev-creator/tts-ptbr) instalado
 numa pasta qualquer:
 
 ```bash

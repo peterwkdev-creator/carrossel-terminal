@@ -9,8 +9,8 @@ que grava voz.wav e tempos.json com o tempo de cada frase; o slide troca
 quando começa a 1ª frase dele. Na tela, por SELO_S segundos, o selo "feito
 com IA" com a versão do TTS.
 
-Onde fica o TTS, nesta ordem: --tts <pasta>, a variável CARROSSEL_TTS, e a
-pasta sys-tts ao lado desta. O Python do TTS: a variável CARROSSEL_TTS_PYTHON,
+Onde fica o TTS, nesta ordem: --tts <pasta>, a variável CARROSSEL_TTS, e as
+pastas tts-ptbr ou sys-tts ao lado desta. O Python do TTS: a variável CARROSSEL_TTS_PYTHON,
 o .venv-kokoro dentro da pasta do TTS, ou o Python que roda este script.
 
 Legenda: blocos de até PALAVRAS palavras, caixa escura, base em
@@ -108,13 +108,15 @@ def duracoes(tempos, n):
 
 
 def achar_tts(args):
-    """Pasta do TTS (--tts, CARROSSEL_TTS ou ../sys-tts) e o Python que o roda."""
+    """Pasta do TTS (--tts, CARROSSEL_TTS, ../tts-ptbr ou ../sys-tts) e o Python que o roda."""
     if "--tts" in args:
         i = args.index("--tts")
         tts = pathlib.Path(args[i + 1])
         del args[i:i + 2]
     else:
-        tts = pathlib.Path(os.environ.get("CARROSSEL_TTS") or AQUI.parent / "sys-tts")
+        vizinhas = [AQUI.parent / "tts-ptbr", AQUI.parent / "sys-tts"]
+        padrao = next((v for v in vizinhas if (v / "narrar.py").is_file()), vizinhas[0])
+        tts = pathlib.Path(os.environ.get("CARROSSEL_TTS") or padrao)
     tts = tts.resolve()
     if not (tts / "narrar.py").is_file():
         sys.exit(f"ERRO: narrar.py não encontrado em {tts}; aponte o TTS com --tts <pasta> "

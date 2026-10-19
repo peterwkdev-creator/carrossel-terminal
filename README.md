@@ -101,10 +101,10 @@ Formato do `texto.md` (está também no topo do `gerar.py`):
 
 **Reel narrado (opcional).** O `reel_narrado.py` lê `<post>/narracao.txt`
 (linhas `slide | frase`) e chama o `narrar.py` de um TTS em português, o
-repositório `tts-ptbr` do mesmo autor, que
+repositório [`tts-ptbr`](https://github.com/peterwkdev-creator/tts-ptbr) do mesmo autor, que
 devolve a voz e o tempo de cada frase. Sem ele, todo o resto funciona. A pasta
 do TTS vem de `--tts <pasta>`, da variável `CARROSSEL_TTS` ou, por padrão, de
-`../sys-tts`; o Python dele, de `CARROSSEL_TTS_PYTHON` ou do `.venv-kokoro`
+`../tts-ptbr` (um clone ao lado deste); o Python dele, de `CARROSSEL_TTS_PYTHON` ou do `.venv-kokoro`
 dentro da pasta.
 
 ## Como é testado
