@@ -1,0 +1,4 @@
+# Python 3.10 ou mais novo. Fora do pip: Chrome, Chromium ou Edge (todos os
+# scripts) e ffmpeg (só reel.py e reel_narrado.py).
+Pillow>=10.1
+numpy>=1.24

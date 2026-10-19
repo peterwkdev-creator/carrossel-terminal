@@ -1,0 +1,17 @@
+/* tema: minimo — fundo liso, sem grade nem brilho, sem cartões.
+   Carregado depois do modelo.css (cabeçalho "tema: minimo" no texto.md). */
+:root { --fundo: #0d1117; --deco-pior: rgb(13, 17, 23); /* sem .deco visível: o fundo é o pior */ }
+.deco { display: none; }
+
+.selo { background: none; border-radius: 6px; border: 2px solid var(--dest); padding: 6px 18px; }
+.selo::before { display: none; }
+.progresso i.feito { box-shadow: none; }
+
+h2 { color: var(--dest-forte); }
+ul { gap: 18px; }
+li { background: none; border: 0; border-radius: 0; padding: 0 0 0 52px; }
+li::before { left: 0; top: 0; }
+table { background: none; border-radius: 0; border-width: 2px 0; }
+th { background: none; }
+
+.tipo-capa h1::after { box-shadow: none; }

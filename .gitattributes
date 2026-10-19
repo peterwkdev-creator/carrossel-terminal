@@ -1,0 +1,7 @@
+* text=auto eol=lf
+
+# Conteúdo testado byte a byte: as provas do conferidor e as imagens
+provas/** binary
+*.png binary
+*.mp4 binary
+*.wav binary

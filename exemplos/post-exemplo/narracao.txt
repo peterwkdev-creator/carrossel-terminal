@@ -1,0 +1,6 @@
+# Narração do exemplo para o reel_narrado.py. Formato: slide | frase.
+1 | Três hábitos para revisar o commit antes do push.
+2 | Primeiro: leia o diff inteiro e procure o que não devia estar ali.
+3 | Segundo: um assunto por commit, com uma mensagem que diz qual é.
+4 | Terceiro: rode os testes de novo. Teste vermelho não sobe.
+5 | Leia o diff, um assunto por commit e testes verdes. Salve para a próxima revisão.

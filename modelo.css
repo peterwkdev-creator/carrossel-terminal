@@ -1,0 +1,122 @@
+/* Modelo visual peterwk.dev (§4 do plano), v2 de 18/10: fundo de terminal com grade
+   e brilho verde, um destaque (verde), âmbar só para alerta. Sem laranja e sem lilás.
+   Fontes locais do Windows: Bahnschrift (títulos), Segoe UI (texto), Consolas (código). */
+:root {
+  --fundo: #0a0e14;
+  --painel: #11161d;
+  --painel2: #161c25;
+  --borda: #232c38;
+  --texto: #e8eef4;
+  --suave: #a9b4bf;
+  --dest: #3fb950;
+  --dest-forte: #56d364;
+  --alerta: #e3b341;
+  --titulo: Bahnschrift, "Segoe UI", sans-serif;
+  --sans: "Segoe UI", system-ui, sans-serif;
+  --mono: Consolas, "Cascadia Mono", monospace;
+  /* Cor mais clara que a .deco alcança (brilho verde + solda do padrão de chip):
+     pixel mais claro do fundo renderizado sozinho, medido em 18/10. Mudou a .deco,
+     medir de novo. A auditoria mede o contraste também contra ela. */
+  --deco-pior: rgb(29, 75, 41);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; }
+body {
+  background: var(--fundo); color: var(--texto); font-family: var(--sans);
+  display: flex; flex-direction: column; padding: 60px 76px 52px; position: relative;
+}
+body > * { position: relative; z-index: 1; }
+.deco {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 92% 4%, rgba(63, 185, 80, .16), transparent 46%),
+    radial-gradient(circle at 0% 100%, rgba(63, 185, 80, .07), transparent 40%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' fill='none' stroke='%233fb950' stroke-width='2'><g stroke-opacity='.11'><path d='M0 40H70l30 30h50M222 40H240M120 0v24M120 240v-26l-24-24H40M178 0v20l-18 18M0 152h24l16-16V100M142 168H96M178 204v36M214 152h26'/></g><g stroke-opacity='.14'><rect x='150' y='140' width='56' height='56' rx='4' fill='%233fb950' fill-opacity='.04'/><path d='M160 140v-8M172 140v-8M184 140v-8M196 140v-8M160 196v8M172 196v8M184 196v8M196 196v8M150 152h-8M150 168h-8M150 184h-8M206 152h8M206 168h8M206 184h8'/></g><g fill='%233fb950' fill-opacity='.14' stroke='none'><circle cx='150' cy='70' r='5'/><circle cx='222' cy='40' r='5'/><circle cx='120' cy='24' r='5'/><circle cx='40' cy='190' r='5'/><circle cx='160' cy='38' r='5'/><circle cx='40' cy='100' r='5'/><circle cx='96' cy='168' r='5'/></g></svg>");
+  background-size: auto, auto, 240px 240px;
+}
+.deco::after { /* esmaece a grade no miolo, onde fica o texto */
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 45% 55%, rgba(10, 14, 20, .85), transparent 70%);
+}
+
+/* topo: selo + contador */
+header { display: flex; justify-content: space-between; align-items: center; }
+.selo {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 30px; color: var(--dest-forte);
+  background: #0f1d15; border: 2px solid #2b6b38; border-radius: 999px; padding: 8px 24px 8px 20px;
+}
+.selo::before { content: ""; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--dest-forte); box-shadow: 0 0 0 6px rgba(86, 211, 100, .18), 0 0 18px var(--dest-forte); }
+.contador { font-family: var(--mono); font-size: 30px; color: var(--suave); }
+.contador b { color: var(--texto); }
+
+.conteudo { flex: 1; overflow: hidden; display: flex; flex-direction: column;
+  justify-content: center; gap: 30px; padding: 36px 0; }
+
+/* rodapé: barra de progresso do carrossel + assinatura */
+footer { display: flex; flex-direction: column; gap: 18px; font-family: var(--mono); font-size: 30px; color: var(--suave); }
+.progresso { display: flex; gap: 8px; }
+.progresso i { flex: 1; height: 6px; border-radius: 3px; background: var(--borda); }
+.progresso i.feito { background: var(--dest); box-shadow: 0 0 10px rgba(63, 185, 80, .5); }
+.assina { display: flex; justify-content: space-between; }
+.assina .seta { color: var(--dest-forte); }
+
+/* tipografia */
+.kicker { font-family: var(--mono); font-size: 32px; color: var(--dest-forte); letter-spacing: 1px; }
+.kicker.alerta-k { color: var(--alerta); }
+h1 { font-family: var(--titulo); font-size: 84px; line-height: 1.02; font-weight: 700; letter-spacing: -1px; }
+h2 { font-size: 42px; line-height: 1.25; font-weight: 400; color: var(--suave); }
+p, li { font-size: 38px; line-height: 1.36; }
+code { font-family: var(--mono); font-size: .9em; color: var(--dest-forte); background: var(--painel2);
+  border: 2px solid var(--borda); border-radius: 8px; padding: 0 10px; }
+.dest { color: var(--dest-forte); font-weight: 700; }
+.alerta { color: var(--alerta); font-weight: 700; }
+
+/* lista em cartões, com o prompt do terminal */
+ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+li { background: var(--painel); border: 2px solid var(--borda); border-left: 6px solid var(--dest);
+  border-radius: 14px; padding: 12px 24px 12px 66px; position: relative; }
+li::before { content: "❯"; font-family: var(--mono); color: var(--dest-forte); position: absolute; left: 26px; top: 12px; }
+
+/* tabela como painel */
+table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 34px;
+  background: var(--painel); border: 2px solid var(--borda); border-radius: 16px; overflow: hidden; }
+th, td { text-align: left; padding: 18px 22px; vertical-align: top; }
+td { border-top: 2px solid var(--borda); }
+th { font-family: var(--mono); font-size: 30px; font-weight: 400; color: var(--dest-forte);
+  background: var(--painel2); text-transform: uppercase; letter-spacing: 1px; }
+
+/* lugar da captura: janela de terminal tracejada em âmbar */
+.captura { flex: 1; min-height: 200px; border: 3px dashed var(--alerta); border-radius: 16px;
+  background: var(--painel); display: flex; flex-direction: column; overflow: hidden; }
+/* captura real: janela de terminal com a imagem inteira, sem esticar */
+.tela { flex: 1; min-height: 0; display: flex; flex-direction: column; border: 2px solid var(--borda);
+  border-radius: 16px; overflow: hidden; background: var(--painel); }
+.tela .barra i { width: 16px; height: 16px; border-radius: 50%; background: #3a4452; }
+.tela .rotulo-ok { font-family: var(--mono); color: var(--suave); font-size: 30px; margin-left: 12px; }
+.tela .quadro { flex: 1; min-height: 0; background: #05070a; }
+.tela img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center top; }
+.tela .barra, .captura .barra { display: flex; align-items: center; gap: 10px; padding: 12px 20px;
+  background: var(--painel2); border-bottom: 2px solid var(--borda); }
+.captura .barra i { width: 16px; height: 16px; border-radius: 50%; background: #3a4452; }
+.captura .rotulo { font-family: var(--mono); color: var(--alerta); font-weight: 700; font-size: 30px; margin-left: 12px; }
+.captura .descr { flex: 1; display: flex; align-items: center; padding: 20px 32px; font-size: 32px; line-height: 1.35; }
+.captura .descr code { font-size: 1em; }
+
+/* capa: título que se lê na miniatura da grade */
+.tipo-capa .conteudo { justify-content: center; gap: 34px; }
+.tipo-capa h1 { font-size: 132px; line-height: .98; letter-spacing: -3px; }
+.tipo-capa h1::after { content: ""; display: inline-block; width: 26px; height: 108px; margin-left: 18px;
+  vertical-align: -6px; background: var(--dest-forte); box-shadow: 0 0 24px rgba(86, 211, 100, .6); }
+.tipo-capa h2 { font-family: var(--titulo); font-size: 64px; font-weight: 600; color: var(--dest-forte); }
+.tipo-capa p { color: var(--suave); border-left: 6px solid var(--dest); padding-left: 28px; }
+
+/* último slide: método, versão, data, fontes (lista simples, sem cartões) */
+.tipo-fontes .conteudo { justify-content: flex-start; gap: 20px; }
+.tipo-fontes h1 { font-size: 64px; }
+.tipo-fontes p, .tipo-fontes li { font-size: 30px; line-height: 1.32; }
+.tipo-fontes ul { gap: 6px; background: var(--painel); border: 2px solid var(--borda); border-radius: 14px; padding: 18px 24px; }
+.tipo-fontes li { background: none; border: 0; border-radius: 0; padding: 0 0 0 40px; font-family: var(--mono);
+  overflow-wrap: anywhere; }
+.tipo-fontes li::before { left: 0; top: 0; }

@@ -1,0 +1,36 @@
+name: Resultado diferente do esperado
+description: Um script deu um resultado diferente do esperado (slide, defeito, Reel). Caso que falta vai no outro modelo.
+title: "Resultado diferente: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use dados inventados: nada de nome, documento ou dado real de pessoa ou de empresa.
+        O conferidor ajuda, mas não substitui olhar o slide no celular antes de publicar.
+  - type: input
+    id: versao
+    attributes:
+      label: Versão
+      description: "Saída de `python gerar.py --versao` e o sistema (Windows, macOS, Linux)."
+    validations:
+      required: true
+  - type: textarea
+    id: entrada
+    attributes:
+      label: O que você rodou
+      description: O `texto.md` (ou o trecho que reproduz) e o comando.
+    validations:
+      required: true
+  - type: textarea
+    id: obtido
+    attributes:
+      label: O que o script deu
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava, e de onde vem
+      description: O que devia sair, e por quê (a medida, a regra, o slide).
+    validations:
+      required: true

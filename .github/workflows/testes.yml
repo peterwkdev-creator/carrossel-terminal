@@ -1,0 +1,35 @@
+# Testes a cada push e pull request, do checkout limpo: o gerar.py no
+# exemplo, o conferidor nas duas provas (o plantado acusa, o limpo passa) e
+# os blocos Python do README. O runner do Ubuntu já traz o Chrome; os testes
+# que precisam dele são pulados onde ele não existe. O Reel (ffmpeg) fica
+# fora do CI. Actions fixadas pelo commit da versão do comentário (a tag se
+# move).
+name: testes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    # a suíte leva segundos; sem teto, um processo preso segura o job por 6 h
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest -v

@@ -1,0 +1,18 @@
+# Segredo (bloco padrão: nunca entra)
+.env*
+!.env.example
+*backup_codes*
+*recovery*codes*
+*.pem
+*.key
+.claude/settings.local.json
+
+__pycache__/
+*.pyc
+
+# Gerado (refaz com gerar.py, reel.py, amostras.py e provas.py)
+html/
+png/
+reel/
+amostras/
+provas/*/capturas/

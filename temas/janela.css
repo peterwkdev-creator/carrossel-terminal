@@ -1,0 +1,25 @@
+/* tema: janela — o slide inteiro dentro de uma janela de terminal.
+   Carregado depois do modelo.css (cabeçalho "tema: janela" no texto.md). */
+:root {
+  --fundo: #06080b;
+  --painel: #0b0f15;
+  /* a cor mais clara atrás do texto é a barra de título da janela */
+  --deco-pior: rgb(22, 28, 37);
+}
+body { padding: 38px 86px 70px; }
+header { padding-left: 64px; }
+
+.deco {
+  inset: 28px; border-radius: 28px; border: 2px solid var(--borda);
+  background: #11161d; background-image: none;
+  box-shadow: 0 0 0 1px #000, 0 30px 80px rgba(0, 0, 0, .6);
+}
+.deco::after { /* barra de título */
+  inset: 0 0 auto 0; height: 72px; border-radius: 26px 26px 0 0;
+  background: #161c25; border-bottom: 2px solid var(--borda);
+}
+.deco::before { /* os três pontos da janela */
+  content: ""; position: absolute; z-index: 1; top: 28px; left: 32px;
+  width: 16px; height: 16px; border-radius: 50%; background: #3a4452;
+  box-shadow: 28px 0 #3a4452, 56px 0 #3a4452;
+}
